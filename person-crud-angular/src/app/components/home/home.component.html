@@ -1,0 +1,66 @@
+<div class="jumbotron jumbotron-fluid mt-5">
+  <div class="container">
+    <ng-container *ngIf="authService.user$ | async as profile; else loggedOut">
+      <ng-container *ngIf="this.roleService.isUserAdmin(profile.sub)">
+        <h1 class="display-4">Hola {{profile.name}}</h1>
+        <p class="lead">A continuacion encontraras el estado las simulaciones realizadas</p>
+        <app-person></app-person>
+      </ng-container>
+      <ng-container *ngIf="!this.roleService.isUserAdmin(profile.sub) && !this.showSimulation">
+        <h1 class="display-4">Hola {{profile.name}}</h1>
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <div class="container-fluid py-5">
+            <p class="col-md-8 fs-4">Recuerda completar los datos de perfil en la pestaña superior
+            </p>
+            <hr>
+            <p class="col-md-8 fs-4">Da click a el boton para empezar la simulación, ten en en cuenta que el tiempo empezara a correr desde
+            ese momento
+            </p>
+            <button class="btn btn-primary btn-lg" (click)="this.startSimulation()">Empezar simulación</button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!this.roleService.isUserAdmin(profile.sub) && this.showSimulation">
+        <h1 class="display-4">Hola {{profile.name}}</h1>
+        <p class="lead">A continuacion encontraras la simulacion, buena suerte!</p>
+        <app-mini-game></app-mini-game>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <div class="p-5 mb-4 bg-dark rounded-3">
+    <div class="container-fluid text-white py-5">
+      <h1 class="display-5 fw-bold">Bienvenido a ACME</h1>
+      <p class="col-md-8 fs-4">En esta aplicacion podras administrar tus simulaciones de conducción</p>
+      <ng-container *ngIf="authService.isAuthenticated$ | async; else loggedOut">
+        <ng-container *ngIf="authService.user$ | async as profile">
+          <img [src]="profile.picture" width="30" height="30" alt="">
+        </ng-container>
+      </ng-container>
+
+      <ng-template #loggedOut>
+        <button type="button" class="btn btn-success btn-lg" (click)="authService.loginWithRedirect()">Login</button>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+
+<div class="row align-items-md-stretch">
+  <div class="col-md-6">
+    <div class="h-100 p-5 text-white bg-dark rounded-3">
+      <h1 class="display-5 fw-bold">Visión</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at imperdiet mi.
+        Aliquam a tortor egestas, molestie metus nec, mollis ante. Suspendisse maximus cursus sem, id vehicula purus.</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="h-100 p-5 text-white bg-dark rounded-3">
+      <h1 class="display-5 fw-bold">Misión</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at imperdiet mi.
+        Aliquam a tortor egestas, molestie metus nec, mollis ante. Suspendisse maximus cursus sem, id vehicula purus.</p>
+    </div>
+  </div>
+</div>
+<!--*ngIf="(authService.isAuthenticated$ | async) === false"-->

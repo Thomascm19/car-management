@@ -1,0 +1,31 @@
+<div class="mb-5">
+  <div class="float-end">
+    <button class="btn btn-outline-success" routerLinkActive="active">
+      <a routerLink="personAdd" class="text-none"><i class="fa-solid fa-plus"></i> Agregar</a>
+    </button>
+  </div>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Cedula</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Edad</th>
+    <th scope="col">Fecha de la simulación</th>
+    <th scope="col">Tiempo de la simulación</th>
+    <th scope="col">Editar</th>
+    <th scope="col">Eliminar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <app-loading class="content loading" *ngIf="loading"></app-loading>
+  <tr *ngFor="let person of personService.persons">
+    <th scope="row">{{person.cedula}}</th>
+    <td>{{person.nombre}}</td>
+    <td>{{person.edad}}</td>
+    <td>{{person.fecha_Simulacion}}</td>
+    <td>{{person.tiempo_Simulacion}}</td>
+    <td><a (click)="editPerson(person)"><i class="fas fa-user-edit"></i></a></td>
+    <td><a (click)="deletePerson(person.cedula)"><i class="fas fa-trash-alt"></i></a></td>
+  </tbody>
+</table>

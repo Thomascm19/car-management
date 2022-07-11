@@ -1,0 +1,42 @@
+<main>
+  <div class="py-5 text-center">
+    <h2>{{this.getTextTitle()}}</h2>
+    <p class="lead">{{this.getTextDescription()}}</p>
+  </div>
+  <div class="row g-5">
+    <form [formGroup]="personForm">
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label for="name" class="form-label">Nombre</label>
+          <input id="name" required  class="form-control" type="text" formControlName="nombre">
+        </div>
+        <div class="col-sm-6">
+          <label for="cedula" class="form-label">Cedula: </label>
+          <input required id="cedula" class="form-control" min="10" max="10" type="number" formControlName="cedula">
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label for="edad" class="form-label">Edad: </label>
+          <input id="edad" required class="form-control" type="number" formControlName="edad">
+        </div>
+      </div>
+      <hr>
+      <hr class="my-4">
+      <div *ngIf="!this.isEditAction" class="text-center">
+        <button class="w-50 btn btn-success btn-lg text-center" (click)="this.savePerson()" [disabled]="this.loading">
+          <span *ngIf="this.loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="visually-hidden"></span>
+          {{this.getTextSave()}}
+        </button>
+      </div>
+      <div *ngIf="this.isEditAction" class="text-center">
+        <button class="w-50 btn btn-success btn-lg text-center" (click)="this.updatePerson()" [disabled]="this.validForm()" [disabled]="this.loading">
+          <span *ngIf="this.loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="visually-hidden"></span>
+          {{this.getTextSave()}}
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

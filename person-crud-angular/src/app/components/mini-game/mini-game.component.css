@@ -1,0 +1,25 @@
+.loader{
+  width: 78%;
+  height: 78%;
+  position: absolute;
+  text-align: center;
+  color: #000000ab;
+}
+
+.message {
+  text-align: center;
+  margin-top: 30%;
+  margin-left: 15%;
+}
+
+.loader i {
+  font-size: 50px;
+}
+
+
+.play-ground{
+  display: grid;
+  margin: auto;
+  background-color: #ddd;
+}
+
